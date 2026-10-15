@@ -7,13 +7,18 @@ from handlers.commands.base_handlers import base_handlers
 from handlers.custom_handlers.join_handlers import join_router
 from config.bot_config import client
 from handlers.custom_handlers.custom_commands import filters_router
+from handlers.custom_handlers.monitor_handlers import monitor_router
+from handlers.access import OwnerAccessMiddleware
 
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 logger = get_logger(__name__)
+dp.message.outer_middleware(OwnerAccessMiddleware())
+dp.callback_query.outer_middleware(OwnerAccessMiddleware())
 dp.include_routers(
     base_handlers,
+    monitor_router,
     filters_router,
     join_router,
 )
