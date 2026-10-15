@@ -75,6 +75,11 @@ async def show_filters(message: Message, state: FSMContext):
         await message.answer("⛔ Доступ запрещён.")
         return
 
+    await prompt_filters(message, state)
+
+
+async def prompt_filters(message: Message, state: FSMContext):
+    """Shared prompt; entry-point authorization is handled by caller/middleware."""
     current_filters = keywords_manager.get_keywords()
 
     text = (

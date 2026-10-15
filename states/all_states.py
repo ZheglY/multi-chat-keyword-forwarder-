@@ -10,3 +10,7 @@ class FiltersStates(StatesGroup):
 
 class JoinStates(StatesGroup):
     join = State()
+
+
+class MonitorStates(StatesGroup):
+    chat_link = State()
